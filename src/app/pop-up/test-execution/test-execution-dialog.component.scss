@@ -1,0 +1,54 @@
+.dialog {
+  height: 500px;
+  width: 500px;
+}
+.text-wrapper {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.centered {
+  font-family: sans-serif;
+  font-size: 1.3em;
+  text-align: center;
+}
+
+.dropzone {
+  height: 100px;
+  display: table;
+  width: 100%;
+  background-color: #eee;
+  border: dotted 1px #aaa;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.files-list {
+  font-family: sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+}
+.files-list .file-name {
+  color: #15c;
+}
+.lamda-form-data {
+ margin: 10px;
+}
+.lamda-form-data .form-key{
+  font-weight: bold;
+  font-size: 12px;
+  overflow-wrap: break-word;
+  margin :5px;
+}
+.lamda-form-data .form-value{
+  font-size: 12px;
+  overflow-wrap: break-word;
+  margin :5px;
+}
+.lamda-form-data .scala-editor-code{
+  background-color: black;
+  color: white;
+  padding: 10px;
+}

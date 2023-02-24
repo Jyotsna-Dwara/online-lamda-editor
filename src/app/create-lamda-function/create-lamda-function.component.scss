@@ -1,0 +1,8 @@
+.form-group-label:after {
+  content: "*";
+  color: red;
+  margin-left: 5px;
+}
+.mat-mdc-text-field-wrapper .mat-mdc-form-field-infix .mat-mdc-floating-label {
+  color: red;
+}

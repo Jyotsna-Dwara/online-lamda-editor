@@ -1,0 +1,51 @@
+<div class="dialog" fxLayout="column" fxLayoutGap="10px">
+  <h1 mat-dialog-title>Add Tags</h1>
+  <mat-divider class="divider"></mat-divider>
+  <div mat-dialog-content>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <span fxFlex="5">Please Select Tags:</span>
+      <mat-form-field appearance="fill" fxFlex="20">
+        <mat-label>Tags</mat-label>
+        <input
+          type="text"
+          placeholder="Search for tags"
+          aria-label="Tags"
+          matInput
+          #tagsInput
+          [matAutocomplete]="auto"
+        />
+        <mat-autocomplete
+          #auto="matAutocomplete"
+          (optionSelected)="selected($event)"
+        >
+          <mat-option
+            *ngFor="let option of filteredOptions | async"
+            [value]="option"
+          >
+            {{ option.name }}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
+      <span fxFlex="5">Selected Tags:</span>
+      <mat-chip-listbox aria-label="Selected Tags" fxFlex="1 1 auto">
+        <mat-chip *ngFor="let tags of selectedTags">
+          {{ tags.name }}
+          <button matChipRemove (click)="remove(tags)">
+            <mat-icon>cancel</mat-icon>
+          </button>
+        </mat-chip>
+      </mat-chip-listbox>
+    </div>
+  </div>
+  <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end end" fxFlex="1" fxLayoutGap="10px">
+    <button mat-flat-button (click)="cancel()">Cancel</button>
+    <button
+      mat-flat-button
+      color="primary"
+      [mat-dialog-close]="selectedTags"
+      cdkFocusInitial
+    >
+      Ok
+    </button>
+  </div>
+</div>

@@ -1,0 +1,151 @@
+<div  [formGroup]="createFunctionForm">
+  <!-- Lamda settings-->
+  <div fxLayout="column" fxLayoutGap="10px">
+    <h4 class="mat-h4 form-group-label">Create Lamda Function</h4>
+    <div fxLayout="column" fxLayoutGap="10px">
+      <div fxLayout="row" fxLayoutGap="10px">
+        <mat-form-field fxFlex="33">
+          <mat-label>Type</mat-label>
+          <mat-select
+            formControlName="type"
+            (selectionChange)="selectTemplateData($event)"
+            aria-label="Template"
+          >
+            <mat-option *ngFor="let value of lamdaTypes" [value]="value">
+              {{ value.label }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field fxFlex="2 1 auto">
+          <mat-label>Version</mat-label>
+          <input matInput formControlName="version" placeholder="Version" />
+        </mat-form-field>
+        <mat-form-field fxFlex="33">
+          <mat-label>Template</mat-label>
+          <mat-select formControlName="template" aria-label="Template">
+            <mat-option value=""> Select</mat-option>
+            <mat-option
+              *ngFor="let templateValue of templateTypeData"
+              [value]="templateValue"
+            >
+              {{ templateValue }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="center center">
+        <div
+          fxLayout="row"
+          fxFlex="1 1 auto"
+          fxLayoutAlign="start center"
+          fxLayoutGap="10px"
+          class="tags"
+        >
+          <mat-form-field fxFlex>
+            <mat-label>Tags</mat-label>
+            <mat-chip-grid #tags aria-label="Tags" formControlName="tags">
+              <mat-chip-row
+                *ngFor="let tag of tagsList"
+                (removed)="removeTags(tag)"
+                [aria-description]="'Tag ' + tag.name"
+              >
+                {{ tag.name }}
+                <button matChipRemove [attr.aria-label]="'Remove ' + tag.name">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+              <input 
+                matInput
+                [matChipInputFor]="tags"
+                readonly
+              />
+            </mat-chip-grid>
+          </mat-form-field>
+        </div>
+
+        <button
+          fxFlex="10"
+          mat-flat-button
+          (click)="addTagsDialog()"
+          aria-label="Add Tag"
+        >
+          Add Tag
+        </button>
+        <button
+          fxFlex="14"
+          mat-flat-button
+          color="primary"
+          (click)="addTags(this.defaultTagList)"
+          aria-label="Add Default Tag"
+        >
+          Add Default Tag
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- Scala Editor -->
+  <div fxLayout="column" fxLayoutGap="10px">
+    <h4 class="mat-h4 form-group-label" fxFlex="5">Scala Editor</h4>
+    <mat-divider class="divider" fxFlex="5"></mat-divider>
+    <div fxFlex="80">
+      <ngx-monaco-editor
+        [options]="editorOptions"
+        formControlName="scalaEditor"
+      ></ngx-monaco-editor>
+    </div>
+  </div>
+  <!-- Execution setting -->
+  <div fxLayout="column" fxLayoutGap="10px">
+    <h4 class="mat-h4 form-group-label">Execution Settings</h4>
+    <mat-divider class="divider"></mat-divider>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50">
+        <mat-label>Maintainence Time</mat-label>
+        <input
+          matInput
+          type="time"
+          formControlName="maintainenceTime"
+          placeholder="maintainence Time"
+        />
+      </mat-form-field>
+      <mat-form-field fxFlex="50">
+        <mat-label>Respnse Batch Size</mat-label>
+        <input
+          matInput
+          formControlName="responseBatchSize"
+          placeholder="Respnse Batch Size"
+        />
+      </mat-form-field>
+    </div>
+    <div fxLayout="row" fxLayoutGap="10px">
+      <mat-form-field fxFlex="50">
+        <mat-label>Input Type</mat-label>
+        <mat-select formControlName="inputType" aria-label="Select Input Type">
+          <mat-option value=""> Select</mat-option>
+          <mat-option *ngFor="let type of inputFileType" [value]="type">{{
+            type
+          }}</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field fxFlex="50">
+        <mat-label>Input Url</mat-label>
+        <input
+          matInput
+          formControlName="inputUrl"
+          type="url"
+          placeholder="Input Url"
+        />
+      </mat-form-field>
+    </div>
+  </div>
+  <div fxLayoutAlign="end end" fxLayoutGap="10px">
+    <button
+      (click)="testExecuteDialog()"
+      mat-flat-button
+      color="primary"
+      [disabled]="createFunctionForm.invalid"
+    >
+      Test
+    </button>
+  </div>
+</div>

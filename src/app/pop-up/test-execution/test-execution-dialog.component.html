@@ -1,0 +1,92 @@
+<div class="dialog" fxLayout="column" fxLayoutGap="10px">
+  <h1 mat-dialog-title>Test Execution</h1>
+  <mat-divider class="divider" ></mat-divider>
+  <div mat-dialog-content>
+    <div fxLayout="column" fxFlex>
+      <div fxLayout="column" fxLayoutGap="10px"  *ngIf="dialogData.formData.inputType == 'File'">
+        <div fxLayoutAlign="center center"
+          class="dropzone"
+          appDragDrop
+          (filesChangeEmiter)="onFileChange($event)"
+        >
+          <div class="text-wrapper">
+            <div class="centered">
+              <input
+                type="file"
+                name="file"
+                id="file"
+                (change)="onFileChange($event)"
+              />
+              <label for="file"
+                ><span class="textLink">Select your file</span> or Drop it
+                here!</label
+              >
+            </div>
+          </div>
+        </div>
+        <div *ngIf="files" class="files-list" fxLayoutAlign="start">
+          <span class="file-name">{{ files.name }}</span>
+        </div>
+      </div>
+      <div *ngIf="dialogData.formData.inputType == 'MQ' || dialogData.formData.inputType == 'API'">
+        <mat-form-field fxFlex>
+          <mat-label>{{ fileType + " Url" }}</mat-label>
+          <input
+            matInput
+            [formControl]="inputUrl"
+            [placeholder]="fileType + ' Url'"
+          />
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="10px"  class="lamda-form-data" fxFlexFill>
+        <div  fxLayout="column"   fxLayoutGap="10px" fxFlex="40" >
+          <div fxLayout="row"  fxLayoutGap="10px">
+            <div fxFlex="50">
+              <div class="form-key">Lamda Function Type</div>
+              <div class="form-value">{{dialogData.formData.type.label}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="form-key">Version</div>
+              <div class="form-value">{{dialogData.formData.version}}</div>
+            </div>
+          </div>
+          <div fxLayout="row"  fxLayoutGap="10px">
+            <div fxFlex="50">
+              <div class="form-key">Tags</div>
+              <div class="form-value">{{dialogData.formData.tags}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="form-key">Template Type</div>
+              <div class="form-value">{{dialogData.formData.template}}</div>
+            </div>
+          </div>
+          <div fxLayout="row"  fxLayoutGap="10px">
+            <div fxFlex="50">
+              <div class="form-key">Input Url</div>
+              <div class="form-value">{{dialogData.formData.inputUrl}}</div>
+            </div>
+            <div fxFlex="50">
+              <div class="form-key">Input Type</div>
+              <div class="form-value">{{dialogData.formData.inputType}}</div>
+            </div>
+          </div> 
+        </div>
+        <div fxLayoutAlign="start start" fxFlex="60" class="scala-editor-code" >
+          <code>
+            {{dialogData.formData.scalaEditor}}
+          </code>
+        </div>
+      </div> 
+    </div>        
+  </div>
+  <div mat-dialog-actions fxLayoutAlign="end" fxFlex="2">
+    <button
+      mat-flat-button
+      color="primary"
+      cdkFocusInitial
+      aria-label="Close"
+    >
+      Ok
+    </button>
+  </div>
+</div>
