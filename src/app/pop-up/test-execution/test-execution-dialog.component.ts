@@ -11,7 +11,6 @@ import { LamdaFunctionForm } from '../../interfaces';
 })
 export class TestExecutionDialogComponent {
   public files?: File;
-  public fileType!: string;
   public inputUrl = new FormControl('');
   
   constructor(
