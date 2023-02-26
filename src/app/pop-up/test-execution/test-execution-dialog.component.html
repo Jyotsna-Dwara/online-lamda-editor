@@ -30,11 +30,11 @@
       </div>
       <div *ngIf="dialogData.formData.inputType == 'MQ' || dialogData.formData.inputType == 'API'">
         <mat-form-field fxFlex>
-          <mat-label>{{ fileType + " Url" }}</mat-label>
+          <mat-label>{{ dialogData.formData.inputType + " Url" }}</mat-label>
           <input
             matInput
             [formControl]="inputUrl"
-            [placeholder]="fileType + ' Url'"
+            [placeholder]="dialogData.formData.inputType + ' Url'"
           />
         </mat-form-field>
       </div>
@@ -84,6 +84,7 @@
       mat-flat-button
       color="primary"
       cdkFocusInitial
+      [mat-dialog-close]=""
       aria-label="Close"
     >
       Ok

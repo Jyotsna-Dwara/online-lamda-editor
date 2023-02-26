@@ -75,7 +75,7 @@ export class CreateLamdaFunctionComponent implements OnInit, OnDestroy {
   }
 
   public addTags(tags:TagListItem[]): void {
-    this.tagsList = [...this.tagsList, ...tags];
+    this.tagsList = this.tagsList.concat(tags);
     this.createFunctionForm.get('tags')?.patchValue(this.tagsList.map(item => item.name)+'');
   }
   public removeTags(deleteTag: TagListItem): void {
@@ -98,7 +98,7 @@ export class CreateLamdaFunctionComponent implements OnInit, OnDestroy {
         formData: this.createFunctionForm.value,
       },
     });
-    dialogRef.afterClosed().subscribe((result: TagListItem[]) => {});
+    dialogRef.afterClosed().subscribe((result: any) => {});
   }
   public selectTemplateData(event: any): void {
     this.templateTypeData = event.value.list;
