@@ -25,4 +25,7 @@ export class TestExecutionDialogComponent {
     }
     this.files = files[0];
   }
+  onDragDropFiles(tempFileList?: File): void {
+    this.files = tempFileList;
+  }
 }
